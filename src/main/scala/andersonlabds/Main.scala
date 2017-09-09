@@ -1,3 +1,5 @@
+package andersonlabds
+
 import org.apache.ignite.cache.affinity.rendezvous.RendezvousAffinityFunction
 import org.apache.ignite.{Ignite, IgniteCache, Ignition}
 import org.apache.ignite.spark._
