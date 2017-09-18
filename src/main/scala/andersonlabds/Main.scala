@@ -34,13 +34,14 @@ object Main{
     val inputRDD = sc.textFile(inputFile)
     val pipedRDD1 = inputRDD.pipe(script)
     pipedRDD1.take(20).foreach(println)
-    
+
     // IgniteRDD
     val (ic, cachecfg) = configureIgnite(spark.sparkContext)
     val sharedRDD = ic.fromCache(cachecfg)
-    val pipedRDD2 = sharedRDD.pipe(script)
+    sharedRDD.saveValues[String](inputRDD, (String, ic) => String)
+    val pipedRDD2 = sharedRDD.map(tuple => tuple._2).pipe(script)
     pipedRDD2.take(20).foreach(println)
-    
+    ic.close()
   }
 
     def configureIgnite(sc: SparkContext): (IgniteContext, CacheConfiguration[IgniteUuid, String]) = {
