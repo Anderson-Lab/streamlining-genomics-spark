@@ -15,5 +15,6 @@
     1. On worker machine, go to ignite binary dir and `bin/ignite.sh`
 1. Run demo
     1. `cd streamlining-genomics-spark`
+    1. `mkdir Pipes`
     1. `mvn clean package`
     1. `mvn exec:java`
